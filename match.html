@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameNgo - Find a Match</title>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById("nav-links");
+            navLinks.style.display = navLinks.style.display === "flex" ? "none" : "flex";
+        }
+    </script>
+</head>
+<body style="font-family: Arial, sans-serif; text-align: center; margin: 0; padding: 0; background-color: #f8f9fa;">
+
+    <!-- Navigation Bar -->
+    <nav style="background-color: darkblue; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; position: relative;">
+        <div style="display: flex; align-items: center;">
+            <img src="logo.jpg" alt="GameNgo Logo" style="height: 40px; width: 40px; border-radius: 50%; margin-right: 10px;">
+            <span style="font-size: 22px; font-weight: bold;">GameNgo</span>
+        </div>
+
+        <!-- Hamburger Icon -->
+        <div style="font-size: 24px; cursor: pointer; display: none;" id="menu-icon" onclick="toggleMenu()">☰</div>
+
+        <ul id="nav-links" style="list-style: none; padding: 0; margin: 0; display: flex; gap: 15px;">
+            <li><a href="home.html" style="color: white; text-decoration: none;">Home</a></li>
+        </ul>
+    </nav>
+
+    <!-- Find a Match Section -->
+    <div style="max-width: 400px; margin: 50px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h1 style="color: darkblue; font-size: 22px;">Find a Match</h1>
+        <p style="color: #555;">Connect with a random player or use a match code.</p>
+
+        <button id="randomMatchBtn" style="width: 100%; padding: 12px; background: darkblue; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-bottom: 10px;">Find Random Match</button>
+        
+        <div style="margin: 10px 0; font-weight: bold; color: #888;">OR</div>
+
+        <input type="text" id="matchCode" placeholder="Enter Match Code" style="width: 92%; padding: 10px; border: 2px solid darkblue; border-radius: 5px; font-size: 16px; margin-bottom: 10px; text-align: center;">
+        
+        <button id="codeMatchBtn" style="width: 100%; padding: 12px; background: darkblue; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">Find by Code</button>
+
+        <p id="matchResult" style="margin-top: 15px; font-size: 16px;"></p>
+    </div>
+
+    <!-- JavaScript Code -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const randomMatchBtn = document.getElementById("randomMatchBtn");
+            const codeMatchBtn = document.getElementById("codeMatchBtn");
+            const matchCodeInput = document.getElementById("matchCode");
+            const matchResult = document.getElementById("matchResult");
+            const menuIcon = document.getElementById("menu-icon");
+            const navLinks = document.getElementById("nav-links");
+
+            function generateMatchID() {
+                return "MATCH-" + Math.floor(1000 + Math.random() * 9000);
+            }
+
+            randomMatchBtn.addEventListener("click", () => {
+                const randomMatchID = generateMatchID();
+                matchResult.innerHTML = `🎉 You are matched with a player! Match ID: <strong>${randomMatchID}</strong>`;
+                matchResult.style.color = "green";
+            });
+
+            codeMatchBtn.addEventListener("click", () => {
+                const enteredCode = matchCodeInput.value.trim();
+
+                if (enteredCode === "") {
+                    matchResult.innerHTML = "⚠️ Please enter a match code.";
+                    matchResult.style.color = "red";
+                    return;
+                }
+
+                if (enteredCode.startsWith("MATCH-") && enteredCode.length === 10) {
+                    matchResult.innerHTML = `✅ Match found! You are connected with another player.`;
+                    matchResult.style.color = "green";
+                } else {
+                    matchResult.innerHTML = `❌ Invalid match code. Please try again.`;
+                    matchResult.style.color = "red";
+                }
+            });
+
+            // Responsive Navbar Toggle
+            if (window.innerWidth <= 768) {
+                menuIcon.style.display = "block";
+                navLinks.style.display = "none";
+                navLinks.style.flexDirection = "column";
+                navLinks.style.backgroundColor = "darkblue";
+                navLinks.style.width = "100%";
+                navLinks.style.position = "absolute";
+                navLinks.style.top = "60px";
+                navLinks.style.left = "0";
+                navLinks.style.padding = "10px";
+            }
+        });
+    </script>
+
+</body>
+</html>

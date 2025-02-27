@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameNgo - Profile</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa;">
+
+    <!-- Navigation Bar -->
+    <nav style="background-color: darkblue; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; position: relative;">
+        <div style="display: flex; align-items: center;">
+            <img src="logo.jpg" alt="GameNgo Logo" style="height: 40px; width: 40px; border-radius: 50%; margin-right: 10px;">
+            <span style="font-size: 22px; font-weight: bold;">GameNgo</span>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="menuToggle" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer; display: none;">☰</button>
+
+        <ul id="navLinks" style="list-style: none; padding: 0; margin: 0; display: flex; gap: 15px; flex-wrap: wrap;">
+            <li><a href="home.html" style="color: white; text-decoration: none;">Home</a></li>
+            <li><a href="sports.html" style="color: white; text-decoration: none;">Sports Equipment</a></li>
+            <li><a href="turf.html" style="color: white; text-decoration: none;">Turf Booking</a></li>
+            <li><a href="match.html" style="color: white; text-decoration: none;">Find a Match</a></li>
+            <li><a href="profile.html" style="color: yellow; text-decoration: none; font-weight: bold;">Profile</a></li>
+            <li><a href="contact.html" style="color: white; text-decoration: none;">Contact Us</a></li>
+            <li><a href="#" id="logoutBtn" style="background: white; color: darkblue; padding: 8px 15px; border-radius: 5px; text-decoration: none;">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Profile Section -->
+    <div style="max-width: 400px; margin: 50px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); text-align: center;">
+        <h1 style="color: darkblue; font-size: 22px;">My Profile</h1>
+        <div>
+            <img src="logo.jpg" id="profileImage" alt="User Avatar" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px;">
+            <p><strong>Username:</strong> <span id="username">Loading...</span></p>
+            <p><strong>Points:</strong> <span id="points">0</span></p>
+        </div>
+    </div>
+
+    <!-- JavaScript for Mobile Navbar Toggle -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const menuToggle = document.getElementById("menuToggle");
+            const navLinks = document.getElementById("navLinks");
+
+            function checkScreenSize() {
+                if (window.innerWidth <= 768) {
+                    menuToggle.style.display = "block";
+                    navLinks.style.display = "none";
+                    menuToggle.addEventListener("click", function() {
+                        navLinks.style.display = navLinks.style.display === "block" ? "none" : "block";
+                    });
+                } else {
+                    menuToggle.style.display = "none";
+                    navLinks.style.display = "flex";
+                }
+            }
+
+            checkScreenSize();
+            window.addEventListener("resize", checkScreenSize);
+        });
+    </script>
+
+    <script src="profile.js"></script>
+</body>
+</html>

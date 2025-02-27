@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - GameNgo</title>
+    <link rel="stylesheet" href="styles1.css">
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .site-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .contact-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        /* Login Container */
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-form h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .login-btn, .forgot-password-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        .login-btn {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .forgot-password-btn {
+            background: none;
+            color: #007bff;
+            text-decoration: underline;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .signup-link {
+            margin-top: 15px;
+        }
+
+        /* Forgot Password Popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 350px;
+        }
+
+        .popup-content {
+            text-align: center;
+        }
+
+        .close-btn {
+            float: right;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .site-name {
+                font-size: 1.2rem;
+            }
+
+            .login-container {
+                padding: 15px;
+                width: 90%;
+            }
+
+            .login-btn, .forgot-password-btn {
+                font-size: 0.9rem;
+            }
+
+            .popup {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <img src="logo.jpg" alt="GameNgo Logo" class="logo">
+            <span class="site-name">GameNgo</span>
+        </div>
+        <div class="nav-right">
+            <a href="contact.html" class="contact-link">Contact Us</a>
+        </div>
+    </nav>
+
+    <!-- Login Section -->
+    <div class="login-container">
+        <div class="login-form">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="fullname">Fullname</label>
+                    <input type="text" id="fullname" name="fullname" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <!-- Forgot Password Button -->
+                <button type="button" class="forgot-password-btn" onclick="showForgotPassword()">Forgot Password?</button>
+
+                <!-- Login Button -->
+                <button type="submit" class="login-btn">Login</button>
+
+                <p id="loginError" class="error-message"></p>
+            </form>
+
+            <!-- Create New Account -->
+            <p class="signup-link">Don't have an account? <a href="signup.html">Create New Account</a></p>
+        </div>
+    </div>
+
+    <!-- Forgot Password Popup -->
+    <div id="forgot-password-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closeForgotPassword()">&times;</span>
+            <h3>Forgot Password</h3>
+            <form id="forgotPasswordForm">
+                <div class="input-group">
+                    <label for="forgot-email">Enter Email</label>
+                    <input type="email" id="forgot-email" name="forgot-email" required>
+                </div>
+                <div class="input-group">
+                    <label for="otp">Enter OTP</label>
+                    <input type="text" id="otp" name="otp" required>
+                </div>
+                <button type="submit" class="reset-password-btn">Reset Password</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showForgotPassword() {
+            document.getElementById("forgot-password-popup").style.display = "block";
+        }
+
+        function closeForgotPassword() {
+            document.getElementById("forgot-password-popup").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
